@@ -2,6 +2,7 @@ package com.sebix.cleanarchitecture.business.data.cache.implementation
 
 import com.sebix.cleanarchitecture.business.data.cache.abstraction.NoteCacheDataSource
 import com.sebix.cleanarchitecture.business.domain.model.Note
+import com.sebix.cleanarchitecture.framework.datasource.cache.abstraction.NoteDaoService
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -30,3 +31,4 @@ constructor(
 
     override suspend fun insertNotes(notes: List<Note>) = noteDaoService.insertNotes(notes)
 }
+

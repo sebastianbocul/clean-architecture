@@ -1,8 +1,13 @@
 package com.sebix.cleanarchitecture.business.domain.state
 
 import android.view.View
+import com.sebix.cleanarchitecture.business.data.network.abstraction.NoteNetworkDataSource
 
 data class StateMessage(val response: Response)
+
+//TEMP
+abstract class TodoCallback {
+}
 
 data class Response(
     val message: String?,

@@ -33,3 +33,6 @@ constructor(
     override suspend fun insertOrUpdateNotes(notes: List<Note>) =
         firestoreService.insertOrUpdateNotes(notes)
 }
+//TEMP
+abstract class NoteFireStoreService: NoteNetworkDataSource {
+}

@@ -36,10 +36,11 @@ android {
     kotlinOptions {
         jvmTarget = Java.java_version
     }
-
     testOptions {
-        unitTests.all {
-            useJunitPlatform()
+        testOptions {
+            unitTests.all {
+                useJUnitPlatform()
+            }
         }
     }
 }

@@ -7,8 +7,9 @@ import com.sebix.cleanarchitecture.business.domain.state.StateMessage
 sealed class NoteListStateEvent : StateEvent {
 
     class InsertNewNoteEvent(
-        val title: String
-    ): NoteListStateEvent() {
+        val title: String,
+        val body: String
+    ) : NoteListStateEvent() {
 
         override fun errorInfo(): String {
             return "Error inserting new note."
@@ -24,7 +25,7 @@ sealed class NoteListStateEvent : StateEvent {
     // for testing
     class InsertMultipleNotesEvent(
         val numNotes: Int
-    ): NoteListStateEvent() {
+    ) : NoteListStateEvent() {
 
         override fun errorInfo(): String {
             return "Error inserting the notes."
@@ -39,7 +40,7 @@ sealed class NoteListStateEvent : StateEvent {
 
     class DeleteNoteEvent(
         val note: Note
-    ): NoteListStateEvent(){
+    ) : NoteListStateEvent() {
 
         override fun errorInfo(): String {
             return "Error deleting note."
@@ -54,7 +55,7 @@ sealed class NoteListStateEvent : StateEvent {
 
     class DeleteMultipleNotesEvent(
         val notes: List<Note>
-    ): NoteListStateEvent(){
+    ) : NoteListStateEvent() {
 
         override fun errorInfo(): String {
             return "Error deleting the selected notes."
@@ -69,7 +70,7 @@ sealed class NoteListStateEvent : StateEvent {
 
     class RestoreDeletedNoteEvent(
         val note: Note
-    ): NoteListStateEvent() {
+    ) : NoteListStateEvent() {
 
         override fun errorInfo(): String {
             return "Error restoring the note that was deleted."
@@ -84,7 +85,7 @@ sealed class NoteListStateEvent : StateEvent {
 
     class SearchNotesEvent(
         val clearLayoutManagerState: Boolean = true
-    ): NoteListStateEvent(){
+    ) : NoteListStateEvent() {
 
         override fun errorInfo(): String {
             return "Error getting list of notes."
@@ -97,7 +98,7 @@ sealed class NoteListStateEvent : StateEvent {
         override fun shouldDisplayProgressBar() = true
     }
 
-    class GetNumNotesInCacheEvent: NoteListStateEvent(){
+    class GetNumNotesInCacheEvent : NoteListStateEvent() {
 
         override fun errorInfo(): String {
             return "Error getting the number of notes from the cache."
@@ -112,7 +113,7 @@ sealed class NoteListStateEvent : StateEvent {
 
     class CreateStateMessageEvent(
         val stateMessage: StateMessage
-    ): NoteListStateEvent(){
+    ) : NoteListStateEvent() {
 
         override fun errorInfo(): String {
             return "Error creating a new state message."
