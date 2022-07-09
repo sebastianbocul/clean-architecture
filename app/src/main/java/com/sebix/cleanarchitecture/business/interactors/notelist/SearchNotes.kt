@@ -15,7 +15,7 @@ class SearchNotes(
 ) {
     fun searchNotes(
         query: String,
-        filerAndOrder: String,
+        filterAndOrder: String,
         page: Int,
         stateEvent: StateEvent
     ): Flow<DataState<NoteListViewState>> = flow {
@@ -26,7 +26,7 @@ class SearchNotes(
         val cacheResult = safeCacheCall(IO) {
             noteCacheDataSource.searchNotes(
                 query = query,
-                filterAndOrder = filerAndOrder,
+                filterAndOrder = filterAndOrder,
                 page = updatePage
             )
         }
