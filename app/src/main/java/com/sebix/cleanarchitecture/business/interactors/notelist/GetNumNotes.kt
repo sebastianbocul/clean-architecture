@@ -24,7 +24,7 @@ class GetNumNotes(
             response = cacheResult,
             stateEvent = stateEvent
         ) {
-            override fun handleSuccess(resultObj: Int): DataState<NoteListViewState> {
+            override suspend fun handleSuccess(resultObj: Int): DataState<NoteListViewState> {
                 val viewState = NoteListViewState(
                     numNotesInCache = resultObj
                 )
