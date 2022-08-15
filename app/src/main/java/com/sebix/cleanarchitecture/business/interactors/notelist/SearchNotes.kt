@@ -55,7 +55,7 @@ class SearchNotes(
                 )
             }
         }.getResult()
-        emit(response)
+        response?.let { emit(it) }
     }
 
     companion object {

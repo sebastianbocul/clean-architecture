@@ -65,8 +65,8 @@ class InsertNewNote(
             }
         }.getResult()
 
-        emit(cacheResponse)
-        updateNetwork(cacheResponse.stateMessage?.response?.message, newNote)
+        cacheResponse?.let { emit(it) }
+        updateNetwork(cacheResponse?.stateMessage?.response?.message, newNote)
     }
 
     private suspend fun updateNetwork(cacheResponse: String?, newNote: Note) {
