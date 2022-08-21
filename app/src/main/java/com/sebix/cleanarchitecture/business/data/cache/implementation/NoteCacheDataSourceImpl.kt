@@ -30,5 +30,7 @@ constructor(
     override suspend fun getNumNotes() = noteDaoService.getNumNotes()
 
     override suspend fun insertNotes(notes: List<Note>) = noteDaoService.insertNotes(notes)
+
+    override suspend fun getAllNotes(): List<Note> = noteDaoService.getAllNotes()
 }
 

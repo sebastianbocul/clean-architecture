@@ -4,8 +4,6 @@ import com.sebix.cleanarchitecture.business.data.cache.abstraction.NoteCacheData
 import com.sebix.cleanarchitecture.business.domain.model.Note
 import com.sebix.cleanarchitecture.business.domain.util.DateUtil
 import com.sebix.cleanarchitecture.framework.datasource.database.NOTE_PAGINATION_PAGE_SIZE
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 const val FORCE_DELETE_NOTE_EXCEPTION = "FORCE_DELETE_NOTE_EXCEPTION"
 const val FORCE_DELETES_NOTE_EXCEPTION = "FORCE_DELETES_NOTE_EXCEPTION"
@@ -18,13 +16,13 @@ class FakeNoteCacheDataSourceImpl
 constructor(
     private val notesData: HashMap<String, Note>,
     private val dateUtil: DateUtil
-): NoteCacheDataSource{
+) : NoteCacheDataSource {
 
     override suspend fun insertNote(note: Note): Long {
-        if(note.id == FORCE_NEW_NOTE_EXCEPTION){
+        if (note.id == FORCE_NEW_NOTE_EXCEPTION) {
             throw Exception("Something went wrong inserting the note.")
         }
-        if(note.id == FORCE_GENERAL_FAILURE){
+        if (note.id == FORCE_GENERAL_FAILURE) {
             return -1 // fail
         }
         notesData[note.id] = note
@@ -32,21 +30,20 @@ constructor(
     }
 
     override suspend fun deleteNote(primaryKey: String): Int {
-        if(primaryKey == FORCE_DELETE_NOTE_EXCEPTION){
+        if (primaryKey == FORCE_DELETE_NOTE_EXCEPTION) {
             throw Exception("Something went wrong deleting the note.")
-        }
-        else if(primaryKey == FORCE_DELETES_NOTE_EXCEPTION){
+        } else if (primaryKey == FORCE_DELETES_NOTE_EXCEPTION) {
             throw Exception("Something went wrong deleting the note.")
         }
         return notesData.remove(primaryKey)?.let {
             1 // return 1 for success
-        }?: - 1 // -1 for failure
+        } ?: -1 // -1 for failure
     }
 
     override suspend fun deleteNotes(notes: List<Note>): Int {
         var failOrSuccess = 1
-        for(note in notes){
-            if(notesData.remove(note.id) == null){
+        for (note in notes) {
+            if (notesData.remove(note.id) == null) {
                 failOrSuccess = -1 // mark for failure
             }
         }
@@ -58,20 +55,20 @@ constructor(
         newTitle: String,
         newBody: String
     ): Int {
-        if(primaryKey == FORCE_UPDATE_NOTE_EXCEPTION){
+        if (primaryKey == FORCE_UPDATE_NOTE_EXCEPTION) {
             throw Exception("Something went wrong updating the note.")
         }
         val updatedNote = Note(
             id = primaryKey,
             title = newTitle,
-            body = newBody?: "",
+            body = newBody ?: "",
             updated_at = dateUtil.getCurrentTimestamp(),
-            created_at = notesData[primaryKey]?.created_at?: dateUtil.getCurrentTimestamp()
+            created_at = notesData[primaryKey]?.created_at ?: dateUtil.getCurrentTimestamp()
         )
         return notesData[primaryKey]?.let {
             notesData[primaryKey] = updatedNote
             1 // success
-        }?: -1 // nothing to update
+        } ?: -1 // nothing to update
     }
 
     // Not testing the order/filter. Just basic query
@@ -82,18 +79,17 @@ constructor(
         String,
         page: Int
     ): List<Note> {
-        if(query == FORCE_SEARCH_NOTES_EXCEPTION){
+        if (query == FORCE_SEARCH_NOTES_EXCEPTION) {
             throw Exception("Something went searching the cache for notes.")
         }
         val results: ArrayList<Note> = ArrayList()
-        for(note in notesData.values){
-            if(note.title.contains(query)){
+        for (note in notesData.values) {
+            if (note.title.contains(query)) {
+                results.add(note)
+            } else if (note.body.contains(query)) {
                 results.add(note)
             }
-            else if(note.body.contains(query)){
-                results.add(note)
-            }
-            if(results.size > (page * NOTE_PAGINATION_PAGE_SIZE)){
+            if (results.size > (page * NOTE_PAGINATION_PAGE_SIZE)) {
                 break
             }
         }
@@ -110,10 +106,14 @@ constructor(
 
     override suspend fun insertNotes(notes: List<Note>): LongArray {
         val results = LongArray(notes.size)
-        for((index,note) in notes.withIndex()){
+        for ((index, note) in notes.withIndex()) {
             results[index] = 1
             notesData[note.id] = note
         }
         return results
+    }
+
+    override suspend fun getAllNotes(): List<Note> {
+        return ArrayList(notesData.values)
     }
 }
