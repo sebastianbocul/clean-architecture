@@ -58,6 +58,8 @@ dependencies {
     implementation Dependencies.kotlin_coroutines_play_services
     implementation Dependencies.kotlin_coroutines_android
     implementation Dependencies.kotlin_coroutines
+    implementation Dependencies.room_ktx
+    implementation Dependencies.room_runtime
 
     //dependencies
     implementation Dependencies.dagger
@@ -73,6 +75,7 @@ dependencies {
 
     //annotation processing
     kapt AnnotationProcessing.dagger_compiler
+    kapt AnnotationProcessing.room_compiler
 
     // Support
     implementation SupportDependencies.appcompat
