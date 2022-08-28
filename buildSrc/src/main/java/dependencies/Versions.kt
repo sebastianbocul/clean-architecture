@@ -37,4 +37,5 @@ object Versions {
     val fragment_version = "1.2.0"
     val androidx_test_ext = "1.1.1"
     val fabric_version = "1.31.2"
+    val firebase_bom = "30.3.2"
 }

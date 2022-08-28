@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "324794623069",
+    "project_id": "clean-notes-ff5d5",
+    "storage_bucket": "clean-notes-ff5d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324794623069:android:6554a8f5bbea05058559b4",
+        "android_client_info": {
+          "package_name": "com.sebix.notes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324794623069-cc93tjimj5l6ji63ss4nuv1o8m5m8o1m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN-pTSsJpjR-T-3U5_Mt9Qg0oLHWoxPb0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324794623069-cc93tjimj5l6ji63ss4nuv1o8m5m8o1m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

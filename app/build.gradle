@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -90,4 +91,7 @@ dependencies {
     testImplementation TestDependencies.junit4
     testImplementation Dependencies.retrofit_gson
     testRuntimeOnly TestDependencies.jupiter_engine
+
+    //Firebase
+    implementation Dependencies.firebase_bom
 }
